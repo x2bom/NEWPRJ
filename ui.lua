@@ -3237,7 +3237,7 @@ end
 
 function UILibrary.new(gameName, userId, rank)
     local GUI = Instance.new("ScreenGui")
-    GUI.Name = HttpService:GenerateGUID(false)
+    GUI.Name = "HD"
     GUI.Parent =
         RunService:IsStudio() == false and game:GetService("CoreGui") or LocalPlayer:WaitForChild("PlayerGui")
     GUI.ResetOnSpawn = false
