@@ -127,7 +127,7 @@ if currentmode ~= "Lobby" then
                     type="summon"
                     --["unitfile"]=findunit(args[3],args[2])
                 })
-                                    Save()
+                Save()
                 return old(self, unpack(args))
             elseif self.Name=="GetFunction" then
                 if args[1]=="Upgrade" then
@@ -142,13 +142,14 @@ if currentmode ~= "Lobby" then
                         type="teamup"
                     })
                     Save()
+                end
                 return old(self, unpack(args))
             end
         end
         
         return old(self, ...)
     end);
-    spawn(function()
+    task.spawn(function()
         while task.wait() do
             if not game:GetService("Workspace").Bases["1"]:FindFirstChild("TowerBillBoard") then
                 if replay then
