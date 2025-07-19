@@ -129,7 +129,7 @@ if currentmode ~= "Lobby" then
             elseif self.Name=="GetFunction" then
                 Settings.record[time]={
                     [1]=args[1],
-                    [2]=args[2] -- args[2][1]="SpecialMove"/"Upgrade"
+                    [2]=args[2], -- args[2][1]="SpecialMove"/"Upgrade"
                     ["unitcf"]=args[2][2].HumanoidRootPart.CFrame
                 }
                 --Save()
