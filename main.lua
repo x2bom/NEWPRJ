@@ -117,38 +117,28 @@ if currentmode ~= "Lobby" then
     old = hookmetamethod(game, "__namecall", function(self, ...)
         local args = {...}
         local method = getnamecallmethod()
-        
+
         if method == 'FireServer' or method == "InvokeServer" then
             if self.Name == "SetEvent" then
-                table.insert(Settings.record,[time]={
+                Settings.record[time]={
                     [1]=args[1],
-                    [2]=args[2],
-                    [3]=args[3],
-                    type="summon"
-                    --["unitfile"]=findunit(args[3],args[2])
-                })
-                Save()
+                    [2]=args[2]
+                }
+                --Save()
                 return old(self, unpack(args))
             elseif self.Name=="GetFunction" then
-                if args[1]=="Upgrade" then
-                    table.insert(Settings.record,[time]={
-                        ["unit"]=args[2],
-                        type="upgrade"
-                    })
-                    Save()
-                elseif args[1] =="SpecialMove" then
-                    table.insert(Settings.record,[time]={
-                        ["unitcf"]=args[2].HumanoidRootPart.CFrame,
-                        type="teamup"
-                    })
-                    Save()
-                end
+                Settings.record[time]={
+                    [1]=args[1],
+                    [2]=args[2] -- args[2][1]="SpecialMove"/"Upgrade"
+                    ["unitcf"]=args[2][2].HumanoidRootPart.CFrame
+                }
+                --Save()
                 return old(self, unpack(args))
             end
         end
-        
+
         return old(self, ...)
-    end);
+    end)
     task.spawn(function()
         while task.wait() do
             if not game:GetService("Workspace").Bases["1"]:FindFirstChild("TowerBillBoard") then
