@@ -126,8 +126,8 @@ if currentmode ~= "Lobby" then
                     [3]=args[3],
                     type="summon"
                     --["unitfile"]=findunit(args[3],args[2])
-                    Save()
                 })
+                                    Save()
                 return old(self, unpack(args))
             elseif self.Name=="GetFunction" then
                 if args[1]=="Upgrade" then
