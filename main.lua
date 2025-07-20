@@ -124,15 +124,17 @@ if currentmode ~= "Lobby" then
                     [1]=args[1],
                     [2]=args[2]
                 }
-                --Save()
+                Save()
                 return old(self, unpack(args))
             elseif self.Name=="GetFunction" then
-                Settings.record[time]={
-                    [1]=args[1],
-                    [2]=args[2], -- args[2][1]="SpecialMove"/"Upgrade"
-                    ["unitcf"]=args[2][2].HumanoidRootPart.CFrame
-                }
-                --Save()
+                if args[2][1]=="SpecialMove" or arg[2][1]=="Upgrade" then
+                    Settings.record[time]={
+                        [1]=args[1],
+                        [2]=args[2], -- args[2][1]="SpecialMove"/"Upgrade"
+                        ["unitcf"]=args[2][2].HumanoidRootPart.CFrame
+                    }
+                end
+                Save()
                 return old(self, unpack(args))
             end
         end
@@ -150,7 +152,7 @@ if currentmode ~= "Lobby" then
                         ["Type"] = "Game"
                     }
                     game:GetService("ReplicatedStorage").Remotes.GetFunction:InvokeServer(ohTable1)
-                    until game:GetService("Workspace").Bases["1"]:FindFirstChild("TowerBillBoard")
+                    repeat task.wait() until game:GetService("Workspace").Bases["1"]:FindFirstChild("TowerBillBoard")
                 end
             end
         end
